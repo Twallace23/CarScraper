@@ -3,6 +3,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 import time
 
 PATH = "/Users/tayvianwallace/Downloads/chromedriver-mac-arm64/chromedriver"
@@ -16,6 +18,14 @@ print(driver.title)
 
 
 price_elements = driver.find_elements(By.CLASS_NAME, "primary-price")
+
+#Find the title element''
+title_element = WebDriverWait(driver, 10).until(
+    EC.presence_of_element_located((By.CLASS_NAME, "title"))
+)
+print("Car Title:", title_element.text)
+
+
 
 filtered_prices = []
 for element in price_elements:
